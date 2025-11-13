@@ -47,7 +47,8 @@ body {
 .header h1,
 h2,
 h3,
-h4,h5 {
+h4,
+h5 {
     margin: 0;
     line-height: 1.1;
     /* réduit l’espace vertical autour du texte */
@@ -225,20 +226,20 @@ h4,h5 {
 
 .toggle-btn {
     position: absolute;
-    top: 2px;
-    /* légèrement en dessous du bord supérieur */
+    top: 44px;
+    /* flotte au-dessus du nœud */
     left: 50%;
     /* centré horizontalement */
     transform: translateX(-50%);
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
-    border: 1px solid #666;
+    border: 1px solid #555;
     background-color: #fff;
     color: #333;
     font-weight: bold;
     font-size: 14px;
-    line-height: 18px;
+    line-height: 20px;
     text-align: center;
     cursor: pointer;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);

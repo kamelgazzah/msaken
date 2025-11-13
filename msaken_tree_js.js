@@ -1,6 +1,21 @@
+// --------------------------------------
+// Popup "About"
 const about = () => {
-    alert("مشجّرة مساكن\n\nهذا المشروع من إنجاز كمال القزّاح (Kamel El-GAZZAH) بهدف جمع شجرة عائلات مساكن في تونس. البيانات تم جمعها من أفراد العائلة و كتاب السّيّد محمود القزّاح ومصادر مختلفة.\n\nيمكنك النقر على أي اسم في الشجرة لرؤية المزيد من التفاصيل حول الشخص، بما في ذلك والده وجدّه وصورته إن وجدت.\n\nتم تطوير هذا المشروع باستخدام مكتبة Treant.js لعرض الشجرة بشكل تفاعلي.\n\nللمزيد من المعلومات أو للمساهمة في توسيع الشجرة، يرجى التواصل معي عبر وسائل التواصل الاجتماعي المذكورة أعلاه.\n\nشكراً لاهتمامكم!");
-}
+    alert(`مشجّرة مساكن
+
+هذا المشروع من إنجاز كمال القزّاح (Kamel El-GAZZAH) بهدف جمع شجرة عائلات مساكن في تونس. البيانات تم جمعها من أفراد العائلة و كتاب السّيّد محمود القزّاح ومصادر مختلفة.
+
+يمكنك النقر على أي اسم في الشجرة لرؤية المزيد من التفاصيل حول الشخص، بما في ذلك والده وجدّه وصورته إن وجدت.
+
+تم تطوير هذا المشروع باستخدام مكتبة Treant.js لعرض الشجرة بشكل تفاعلي.
+
+للمزيد من المعلومات أو للمساهمة في توسيع الشجرة، يرجى التواصل معي عبر وسائل التواصل الاجتماعي المذكورة أعلاه.
+
+شكراً لاهتمامكم!`);
+};
+
+// --------------------------------------
+// Gestion du popup
 function closePopup() {
     const old = document.querySelector('.popup-person');
     if (old) old.remove();
@@ -20,24 +35,39 @@ function showPersonPopup(person, event) {
         <div>${person.genre === 'M' ? 'رجل' : 'امرأة'}</div>
         <div><strong>الأب:</strong> ${pere ? pere.nom : 'محمّد الجدّ الجامع لأهل مساكن'}</div>
         <div><strong>الجدّ:</strong> ${grandpere ? grandpere.nom : 'محمّد الجدّ الجامع لأهل مساكن'}</div>
-        ${person.photourl ? `<div style="margin-top:8px;"><img src="${person.photourl}" alt="${person.nom}" style="max-width:150px; border-radius:4px;"></div>` : ''}`;
+        ${person.photourl ? `<div style="margin-top:8px;"><img src="${person.photourl}" alt="${person.nom}" style="max-width:150px; border-radius:4px;"></div>` : ''}
+    `;
 
-    popup.style.left = (event.pageX + 10) + 'px';
-    popup.style.top = (event.pageY + 10) + 'px';
+    // Positionnement avec un décalage
+    popup.style.left = Math.min(event.pageX + 10, window.innerWidth - 200) + 'px';
+    popup.style.top = Math.min(event.pageY + 10, window.innerHeight - 200) + 'px';
     document.body.appendChild(popup);
 
+    // Fermer le popup si clic en dehors
     document.addEventListener('click', function handler(e) {
-        if (!popup.contains(e.target)) {
-            closePopup();
-            document.removeEventListener('click', handler);
-        }
-    });
+        if (!popup.contains(e.target)) closePopup();
+    }, { once: true });
 }
 
-const rootId = data.find(p => p.id_pere === null)?.id;
+// --------------------------------------
+// Gestion des nœuds cachés
+function loadHiddenNodes() {
+    try {
+        return new Set(JSON.parse(localStorage.getItem('hiddenNodes') || '[-15]'));
+    } catch {
+        return new Set([-15]);
+    }
+}
 
-// Récupère la liste des nœuds à cacher depuis localStorage
-let hiddenNodes = new Set(JSON.parse(localStorage.getItem('hiddenNodes') || '[-15]'));
+function saveHiddenNodes() {
+    localStorage.setItem('hiddenNodes', JSON.stringify([...hiddenNodes]));
+}
+
+let hiddenNodes = loadHiddenNodes();
+
+// --------------------------------------
+// Construction de l'arbre
+const rootId = data.find(p => p.id_pere === null)?.id;
 
 const buildTree = (rootId) => {
     const root = data.find(p => p.id === rootId);
@@ -45,8 +75,7 @@ const buildTree = (rootId) => {
 
     const children = data
         .filter(p => p.id_pere === root.id)
-        // Ne pas inclure les enfants si le parent est dans hiddenNodes
-        .filter(c => !hiddenNodes.has(root.id));
+        .filter(c => !hiddenNodes.has(root.id)); // cacher si parent est caché
 
     return {
         text: { name: root.nom },
@@ -54,9 +83,32 @@ const buildTree = (rootId) => {
         HTMLid: "node-" + root.id,
         children: children.map(c => buildTree(c.id))
     };
+};
+
+// --------------------------------------
+// Fonction utilitaire pour créer le bouton toggle
+function createToggleButton(el, nodeId) {
+    // Vérifie si le nœud a des enfants
+    if (!data.some(c => c.id_pere === nodeId)) return;
+
+    const btn = document.createElement('button');
+    btn.className = 'toggle-btn';           // applique la classe CSS
+    btn.textContent = hiddenNodes.has(nodeId) ? '+' : '−';
+
+    btn.addEventListener('click', e => {
+        e.stopPropagation();
+        if (hiddenNodes.has(nodeId)) hiddenNodes.delete(nodeId);
+        else hiddenNodes.add(nodeId);
+
+        saveHiddenNodes();
+        drawTree(nodeId);                    // redraw + recentre
+    });
+
+    el.appendChild(btn);
 }
 
-
+// --------------------------------------
+// Dessin de l'arbre
 function drawTree(recenterId = null) {
     document.getElementById('tree').innerHTML = '';
     const chart_config = {
@@ -73,47 +125,23 @@ function drawTree(recenterId = null) {
                 onTreeLoaded: () => {
                     data.forEach(p => {
                         const el = document.getElementById("node-" + p.id);
-                        if (el) {
-                            // ✅ Appliquer le style si le nœud a des enfants cachés
-                            if (hiddenNodes.has(p.id)) {
-                                el.classList.add('has-hidden-children');
-                            } else {
-                                el.classList.remove('has-hidden-children');
-                            }
-                            el.addEventListener('click', e => {
-                                e.stopPropagation();
-                                showPersonPopup(p, e);
-                            });
+                        if (!el) return;
 
-                            // Ajouter le bouton ±
-                            const btn = document.createElement('button');
-                            btn.className = 'toggle-btn';
-                            btn.textContent = hiddenNodes.has(p.id) ? '+' : '−';
+                        // Appliquer style pour les nœuds dont les enfants sont cachés
+                        if (hiddenNodes.has(p.id)) el.classList.add('has-hidden-children');
+                        else el.classList.remove('has-hidden-children');
 
-                            btn.addEventListener('click', e => {
-                                e.stopPropagation();
-                                const nodeId = p.id;
+                        // Popup au clic
+                        el.addEventListener('click', e => {
+                            e.stopPropagation();
+                            showPersonPopup(p, e);
+                        });
 
-                                // Vérifier si le nœud a des enfants
-                                if (!data.some(c => c.id_pere === nodeId)) return;
-
-                                // Toggle et mise à jour du Set
-                                if (hiddenNodes.has(nodeId)) {
-                                    hiddenNodes.delete(nodeId);
-                                } else {
-                                    hiddenNodes.add(nodeId);
-                                }
-
-                                // Stocker dans localStorage
-                                localStorage.setItem('hiddenNodes', JSON.stringify([...hiddenNodes]));
-
-                                drawTree(nodeId); // redraw + recentre
-                            });
-
-                            el.appendChild(btn);
-                        }
+                        // Bouton toggle
+                        createToggleButton(el, p.id);
                     });
 
+                    // Recentrage
                     if (recenterId) {
                         const targetNode = document.getElementById("node-" + recenterId);
                         if (targetNode) {
@@ -125,9 +153,10 @@ function drawTree(recenterId = null) {
         },
         nodeStructure: buildTree(rootId)
     };
-
     new Treant(chart_config);
 }
-// ✅ au premier chargement : recentrage sur un id spécifique
+
+// --------------------------------------
+// Initialisation
 const targetId = -17;
 drawTree(targetId);
