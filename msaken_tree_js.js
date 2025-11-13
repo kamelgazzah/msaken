@@ -2,7 +2,6 @@ const about = () => {
     alert("مشجّرة مساكن\n\nهذا المشروع من إنجاز كامل القزّاح (Kamel El-GAZZAH) بهدف جمع شجرة عائلة مساكن في تونس. البيانات تم جمعها من أفراد العائلة و كتاب السّيّد محمود القزّاح ومصادر مختلفة.\n\nيمكنك النقر على أي اسم في الشجرة لرؤية المزيد من التفاصيل حول الشخص، بما في ذلك والده وجدّه وصورته إن وجدت.\n\nتم تطوير هذا المشروع باستخدام مكتبة Treant.js لعرض الشجرة بشكل تفاعلي.\n\nللمزيد من المعلومات أو للمساهمة في توسيع الشجرة، يرجى التواصل معي عبر وسائل التواصل الاجتماعي المذكورة أعلاه.\n\nشكراً لاهتمامكم!");
 }
 
-
 function closePopup() {
     const old = document.querySelector('.popup-person');
     if (old) old.remove();
@@ -39,20 +38,25 @@ function showPersonPopup(person, event) {
 const rootId = data.find(p => p.id_pere === null)?.id;
 
 // Récupère la liste des nœuds à cacher depuis localStorage
-let hiddenNodes = new Set(JSON.parse(localStorage.getItem('hiddenNodes') || '[]'));
+let hiddenNodes = new Set(JSON.parse(localStorage.getItem('hiddenNodes') || '[-15]'));
 
-function buildTree(rootId) {
+const buildTree = (rootId) => {
     const root = data.find(p => p.id === rootId);
     if (!root) return null;
-    const children = data.filter(p => p.id_pere === root.id);
+
+    const children = data
+        .filter(p => p.id_pere === root.id)
+        // Ne pas inclure les enfants si le parent est dans hiddenNodes
+        .filter(c => !hiddenNodes.has(root.id));
 
     return {
         text: { name: root.nom },
         HTMLclass: root.genre === "M" ? "node male" : "node female",
         HTMLid: "node-" + root.id,
-        children: hiddenNodes.has(root.id) ? [] : children.map(c => buildTree(c.id))
+        children: children.map(c => buildTree(c.id))
     };
 }
+
 
 function drawTree(recenterId = null) {
     document.getElementById('tree').innerHTML = '';
@@ -125,11 +129,6 @@ function drawTree(recenterId = null) {
 
     new Treant(chart_config);
 }
-
-
-
-
-
 // ✅ au premier chargement : recentrage sur un id spécifique
 const targetId = -17;
 drawTree(targetId);
