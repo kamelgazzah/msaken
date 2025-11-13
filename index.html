@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="ar">
 
 <head>
     <meta charset="UTF-8">
@@ -12,121 +12,48 @@
 
 <body>
     <div class="header">
+        <div>
+            <img src="tree.svg" alt="Arbre généalogique" width="40" height="40">
+        </div>
         <h1>شجرة عائلات أهل القصور الخمسة، مساكن</h1>
-        <p>Msaken Family Tree,  Tunisia</p>
+        <h2>Msaken Family Tree, Tunisia, </h2>
+
+        <div>
+            <h3>by Kamel El-GAZZAH </h3>
+
+        </div>
+
+        <div><img
+                src="https://scontent.fnbe1-2.fna.fbcdn.net/v/t39.30808-6/549648879_10163200662699324_4257100900795322345_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=XnpMiY6yoqgQ7kNvwGvtUFQ&_nc_oc=AdnmqMj3PMPm6Yvov-7Gch6u_IcGics09mpZeO9rAEgZ9T1AK30SXKJMOu1guFlUNYU&_nc_zt=23&_nc_ht=scontent.fnbe1-2.fna&_nc_gid=oyibXJ-7yaV45EpJzV3fOg&oh=00_Afiq1bp2-RTJNYi_SV5PWtpeND2JP3LWBxW0xwOG3sO0zA&oe=691BD43F"
+                alt="kamel-gazzah" width="50px"></div>
+        <div>
+            <img src="tree.svg" alt="Arbre généalogique" width="40" height="40">
+        </div>
+    </div>
+
+    <!-- Réseaux sociaux sous le header -->
+    <div class="social-links-container">
+        <a href="#" onclick="about()"><img src="about.svg" alt="À propos" width="40" height="40"></a>
+        <a href="https://www.facebook.com/kmlgzh" target="_blank" aria-label="Facebook" class="facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path
+                    d="M22 12a10 10 0 1 0-11 9.95V15h-2v-3h2v-2c0-2 1-3 3-3h2v3h-1c-1 0-1 .5-1 1v1h2l-1 3h-1v6.95A10 10 0 0 0 22 12z" />
+            </svg>
+        </a>
+        <a href="https://x.com/kemalgazzah" target="_blank" aria-label="X" class="x">
+
+            <img src="x.svg" alt="X" width="40" height="40">
+        </a>
+        <a href="https://www.linkedin.com/in/kamel-gazzah/" target="_blank" aria-label="LinkedIn" class="linkedin">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path
+                    d="M4 4h4v16H4V4zm6 0h4v2h.1c.5-.9 1.8-2 3.9-2 4 0 4.5 2.6 4.5 6v10h-4v-9c0-2-1-3-2.5-3S12 11 12 13v7h-4V4z" />
+            </svg>
+        </a>
+    </div>
     <div id="tree"></div>
     <script src="data.js"></script>
-    <script>
-        function closePopup() {
-            const old = document.querySelector('.popup-person');
-            if (old) old.remove();
-        }
-
-        // ✅ Fonction popup réutilisable
-        function showPersonPopup(person, event) {
-            closePopup(); // Ferme toute popup précédente
-
-            const popup = document.createElement('div');
-            popup.className = 'popup-person';
-            // Trouver l'objet père
-            const pere = data.find(p => p.id === person.id_pere);
-            // Trouver l'objet grand-père à partir du père
-            const grandpere = pere ? data.find(p => p.id === pere.id_pere) : null;
-
-            // Contenu HTML de la popup
-            popup.innerHTML = `
-                <div class="close-btn" onclick="closePopup()">✖</div>
-                <h3>${person.nom}</h3>
-                <div><strong>ID:</strong> ${person.id}</div>
-                <div><strong></strong> ${person.genre === 'M' ? 'رجل' : 'امرأة'}</div>
-                <div><strong>الأب:</strong> ${pere ? pere.nom : 'محمّد الجدّ الجامع لأهل مساكن'}</div>
-                <div><strong>الجدّ:</strong> ${grandpere ? grandpere.nom : 'محمّد الجدّ الجامع لأهل مساكن'}</div>
-                ${person.photourl ? `<div style="margin-top:8px;"><img src="${person.photourl}" alt="${person.nom}" style="max-width:150px; border-radius:4px;"></div>` : ''}`;
-
-            // Positionner près du clic
-            popup.style.left = (event.pageX + 10) + 'px';
-            popup.style.top = (event.pageY + 10) + 'px';
-
-            document.body.appendChild(popup);
-
-            // Fermer si on clique ailleurs
-            document.addEventListener('click', function handler(e) {
-                if (!popup.contains(e.target)) {
-                    closePopup();
-                    document.removeEventListener('click', handler);
-                }
-            });
-        }
-
-
-        const rootId = data.find(p => p.id_pere === null)?.id;
-
-        // Fonction récursive pour construire la structure Treant
-        function buildTree(rootId) {
-            const root = data.find(p => p.id === rootId);
-            if (!root) return null;
-            const children = data.filter(p => p.id_pere === root.id);
-            return {
-                text: { name: root.nom },
-                HTMLclass: root.genre === "M" ? "node male" : "node female",
-                HTMLid: "node-" + root.id,
-                children: children.map(c => buildTree(c.id))
-            };
-        }
-
-        const chart_config = {
-            chart: {
-                container: "#tree",
-                rootOrientation: "NORTH", // chaque génération sur une ligne
-                connectors: { type: "step" },
-                nodeAlign: "CENTER",
-                levelSeparation: 25,
-                siblingSeparation: 7,
-                subTeeSeparation: 40,
-                animateOnInit: false,
-                callback: {
-                    onTreeLoaded: () => {
-                        // Actions au clic
-                        data.forEach(p => {
-                            const el = document.getElementById("node-" + p.id);
-                            if (el) {
-                                el.addEventListener('click', e => {
-                                    e.stopPropagation();
-                                    showPersonPopup(p, e); // ✅ ta fonction popup personnalisée
-                                });
-                            }
-                        });
-                        const targetId = -17;
-                        const targetNode = document.getElementById("node-" + targetId);
-                        if (targetNode) {
-                            // Centrer ce nœud dans la fenêtre d’affichage
-                            targetNode.scrollIntoView({
-                                behavior: "smooth",  // défilement fluide
-                                block: "center",     // centrer verticalement
-                                inline: "center"     // centrer horizontalement
-                            });
-                        }
-                    }
-                }
-            },
-            nodeStructure: buildTree(rootId)
-        };
-
-        new Treant(chart_config);
-        // ✅ Ajuster la largeur des nœuds selon le texte
-        document.querySelectorAll('.node').forEach(node => {
-            const text = node.textContent.trim();
-            //console.log('text:',node.textContent+'---length:',text.length);
-            if (text.length > 10) { // seuil à adapter selon ton goût
-                //console.log('Ajustement de la largeur pour:', text);
-                const extra = Math.min(text.length * 5, 200); // limite l’élargissement max
-                node.style.width = (80 + extra) + "px";
-                node.style.whiteSpace = "normal"; // permet le retour à la ligne
-                node.style.handlers = "auto"; // ajuste la hauteur automatiquement
-                //node.style.background="goldenrod";
-            }
-        });
-    </script>
+    <script src="msaken_tree_js.js"></script>
 </body>
 
 </html>

@@ -27,7 +27,8 @@ const data = [
     { "id": -2, "nom": "الحاج عمر", "genre": "M", "id_pere": -3, "photourl": "" },
     { "id": 121, "nom": "الحاج أحمد", "genre": "M", "id_pere": -3, "photourl": "" },
     { "id": -1, "nom": "الحاج أحمد", "genre": "M", "id_pere": -2, "photourl": "" },
-    { "id": 133, "nom": "الحاج محمّد", "genre": "M", "id_pere": -2, "photourl": "" },
+    { "id": 133, "nom": "الحاج امحمّد", "genre": "M", "id_pere": -2, "photourl": "" },
+    { "id": 148, "nom": "الحاج بلقاسم", "genre": "M", "id_pere": -2, "photourl": "" },
     { "id": 51, "nom": "الحاج علي", "genre": "M", "id_pere": -1, "photourl": "" },
     { "id": 1, "nom": "محمّد", "genre": "M", "id_pere": 0, "photourl": "" },
     { "id": 2, "nom": "علي", "genre": "M", "id_pere": 1, "photourl": "" },
@@ -316,6 +317,7 @@ const data = [
     { "id": 7904000, "nom": "ﺳﻤﻴﺮ", "genre": "M", "id_pere": 147, "photourl": "" },
     { "id": 7943557, "nom": "ﻣﺤﻤﺪ", "genre": "M", "id_pere": 147, "photourl": "" },
     { "id": 8044616, "nom": "ﺳﻌﺎﺩ", "genre": "F", "id_pere": 147, "photourl": "" },
+    { "id": 149, "nom": "الشّيخ حسن", "genre": "M", "id_pere": 148, "photourl": "" },
     { "id": 5318606, "nom": "ﻣﺼﻌﺐ", "genre": "M", "id_pere": 5320075, "photourl": "" },
     { "id": 5322353, "nom": "ﻧﺠﺎﺩ", "genre": "M", "id_pere": 5320075, "photourl": "" },
     { "id": 5322354, "nom": "ﺁﻣﻨﺔ", "genre": "F", "id_pere": 5320075, "photourl": "" },
@@ -468,7 +470,6 @@ const data = [
     { "id": 7909163, "nom": "ﻫﻴﺜﻢ", "genre": "M", "id_pere": 9621873, "photourl": "" },
     { "id": 7909941, "nom": "ﻣﻬﻨﺪ", "genre": "M", "id_pere": 9621873, "photourl": "" },
     { "id": 7910305, "nom": "ﺍﻟﻴﺎﺱ", "genre": "M", "id_pere": 9621873, "photourl": "" },
-    { "id": 7963270, "nom": "ﻫﺎﻟﺔ", "genre": "F", "id_pere": 9621873, "photourl": "" },
     { "id": 7963270, "nom": "ﻫﺎﻟﺔ", "genre": "F", "id_pere": 9621873, "photourl": "" }
 
 ];
