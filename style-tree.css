@@ -7,19 +7,68 @@ body {
 .header {
     display: flex;
     align-items: center;
-    /* centre verticalement SVG et texte */
+    /* centre verticalement les éléments */
     justify-content: center;
-    /* centre horizontalement tout le contenu */
-    gap: 15px;
-    /* espace entre SVG et texte */
+    /* centre horizontalement */
+    gap: 10px;
+    /* espace réduit entre les éléments */
     font-weight: bold;
     color: #0056b3;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    padding: 10px;
-    background: #eef4fb;
+
+    background-color: #eef4fb;
+    border: 2px solid #007bff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 10px 20px;
+
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
     text-align: center;
-    /* centre le texte à l’intérieur du bloc texte */
+    /* si le contenu est petit */
+}
+
+.header div {
+    display: flex;
+    align-items: center;
+    /* centre verticalement le contenu interne */
+    gap: 5px;
+    /* petit espace entre texte et icône si besoin */
+}
+
+.header h1,
+.header p {
+    margin: 0;
+    line-height: 1.2;
+    /* réduit l’espace vertical à l’intérieur du texte */
+}
+
+/* Ajuster le line-height des textes */
+.header h1,
+h2,
+h3,
+h4,h5 {
+    margin: 0;
+    line-height: 1.1;
+    /* réduit l’espace vertical autour du texte */
+    font-size: 1.5em;
+}
+
+.header p {
+    margin: 0;
+    line-height: 1.1;
+    /* réduit l’espace vertical autour du texte */
+    font-size: 1em;
+    color: #333;
+}
+
+.header-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    /* réduit l’espace entre titre et sous-titre */
 }
 
 .header-text h1 {
@@ -35,10 +84,24 @@ body {
 
 
 #tree {
-    width: 100%;
-    height: 100vh;
+    width: 99%;
+    /*max-width: 1200px;*/
+    /* largeur maximale pour grands écrans */
+    margin: 20px auto;
+    /* centré horizontalement avec un peu d’espace vertical */
+    padding: 15px;
+    /* espace intérieur pour le contenu */
+    min-height: 300px;
+    /* hauteur minimale */
     overflow: auto;
+
+    /* style du cadre et fond */
+    background-color: #f0f8ff;
+    border: 2px solid #007bff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
+
 
 .node {
     width: 150px;
