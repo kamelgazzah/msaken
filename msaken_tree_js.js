@@ -48,15 +48,37 @@ function showPersonPopup(person, event) {
         if (!popup.contains(e.target)) closePopup();
     }, { once: true });
 }
+function initHiddenNodes(rootId) {
+    // Récupère hiddenNodes depuis localStorage
+    let hiddenNodes = new Set(JSON.parse(localStorage.getItem('hiddenNodes') || '[]'));
+
+    if (hiddenNodes.size === 0) {
+        // Ajouter tous les IDs sauf rootId
+        data.forEach(p => {
+            if (p.id !== rootId) hiddenNodes.add(p.id);
+        });
+        // Sauvegarder dans localStorage
+        localStorage.setItem('hiddenNodes', JSON.stringify([...hiddenNodes]));
+    }
+
+    return hiddenNodes;
+}
+
 
 // --------------------------------------
 // Gestion des nœuds cachés
 function loadHiddenNodes() {
-    try {
+    /*try {
         return new Set(JSON.parse(localStorage.getItem('hiddenNodes') || '[-15]'));
     } catch {
         return new Set([-15]);
+    }*/
+    try {
+        const rootId = data.find(p => p.id_pere === null)?.id;
+        let hiddenNodes = initHiddenNodes(rootId);
+        return hiddenNodes;
     }
+    catch { return new Set([-15]); }
 }
 
 function saveHiddenNodes() {
@@ -69,7 +91,7 @@ let hiddenNodes = loadHiddenNodes();
 // Construction de l'arbre
 const rootId = data.find(p => p.id_pere === null)?.id;
 
-const buildTree = (rootId) => {
+const buildTree0 = (rootId) => {
     const root = data.find(p => p.id === rootId);
     if (!root) return null;
 
@@ -82,6 +104,24 @@ const buildTree = (rootId) => {
         HTMLclass: root.genre === "M" ? "node male" : "node female",
         HTMLid: "node-" + root.id,
         children: children.map(c => buildTree(c.id))
+    };
+};
+
+const buildTree = (nodeId, parentHidden = false) => {
+    const node = data.find(p => p.id === nodeId);
+    if (!node) return null;
+
+    const isHidden = hiddenNodes.has(nodeId) || parentHidden;
+
+    const children = data
+        .filter(p => p.id_pere === nodeId)
+        .filter(c => !isHidden); // exclut tous les enfants si parent caché
+
+    return {
+        text: { name: node.nom },
+        HTMLclass: node.genre === "M" ? "node male" : "node female",
+        HTMLid: "node-" + node.id,
+        children: children.map(c => buildTree(c.id, isHidden))
     };
 };
 
