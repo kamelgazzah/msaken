@@ -159,3 +159,30 @@ body {
     height: 24px;
     fill: currentColor;
 }
+
+.toggle-btn {
+    position: absolute;
+    top: 2px;
+    /* légèrement en dessous du bord supérieur */
+    left: 50%;
+    /* centré horizontalement */
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #666;
+    background-color: #fff;
+    color: #333;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    user-select: none;
+}
+
+.toggle-btn:hover {
+    background-color: #f0f0f0;
+}
