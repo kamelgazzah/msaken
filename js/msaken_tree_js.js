@@ -91,16 +91,17 @@ function showPersonPopup(person, event) {
 
     const pere = data.find(p => p.id === person.id_pere);
     const grandpere = pere ? data.find(p => p.id === pere.id_pere) : null;
-
-    popup.innerHTML = `
+    console.log('person:',person);
+    popup.innerHTML = `<div style="direction: rtl; text-align: right; font-family: 'Amiri', 'Scheherazade', serif;">
         <div class="close-btn" onclick="closePopup2()">✖</div>
+        <div>
         <h3>${person.nom}</h3>
         <div><strong>ID:</strong> ${person.id}</div>
         <div>${person.genre === 'M' ? 'رجل' : 'امرأة'}</div>
-        <div><strong>الأب:</strong> ${pere ? pere.nom : 'محمّد الجدّ الجامع لأهل مساكن'}</div>
-        <div><strong>الجدّ:</strong> ${grandpere ? grandpere.nom : 'محمّد الجدّ الجامع لأهل مساكن'}</div>
-        ${person.photourl ? `<div style="margin-top:8px;"><img src="${person.photourl}" alt="${person.nom}" style="max-width:150px; border-radius:4px;"></div>` : ''}
-    `;
+        <div><strong>الأب:</strong> ${pere ? pere.nom : ''}</div>
+        <div><strong>الجدّ:</strong> ${grandpere ? grandpere.nom : ''}</div>
+        <div>${person.comments}</div>
+        ${person.photourl ? `<div style="margin-top:8px;"><img src="${person.photourl}" alt="${person.nom}" style="max-width:150px; border-radius:4px;"></div>` : ''}</div></div>`;
 
     document.body.appendChild(popup);
 
