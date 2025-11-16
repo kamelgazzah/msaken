@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>مشجّرة مساكن — كمال القزّاح</title>
+
+  <style>
+    :root{
+      --bg:#f6f7fb;
+      --card:#fff;
+      --accent:#f5d042;
+      --text:#222;
+      --muted:#555;
+      --radius:16px;
+      --maxw:880px;
+    }
+
+    /* Reset simple */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: "Segoe UI", Tahoma, Arial, "Noto Naskh Arabic", "Segoe UI Emoji", sans-serif;
+      background: linear-gradient(180deg, var(--bg), #ffffff);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.8;
+      padding:32px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .container{
+      width:100%;
+      max-width:var(--maxw);
+      padding:24px;
+    }
+
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:28px;
+      box-shadow: 0 8px 28px rgba(20,20,40,0.06);
+      border: 1px solid rgba(0,0,0,0.06);
+      overflow:hidden;
+      text-align:right; /* alignement strict à droite */
+      direction:rtl;    /* assure RTL */
+    }
+
+    .header {
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom:18px;
+      justify-content:flex-end; /* icône et titre collés à droite */
+    }
+
+    .badge {
+      min-width:56px;
+      min-height:56px;
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      background: linear-gradient(180deg, #ffd86b, #f5b43b);
+      color:#222;
+      box-shadow: 0 6px 18px rgba(245,180,59,0.18);
+      flex-shrink:0;
+    }
+
+    .title {
+      font-size:20px;
+      font-weight:700;
+      letter-spacing:0.2px;
+    }
+
+    .subtitle{
+      font-size:13px;
+      color:var(--muted);
+      margin-top:4px;
+    }
+
+    .content{
+      margin-top:10px;
+      font-size:16px;
+      color:var(--text);
+      padding:18px;
+      border-radius:10px;
+      line-height:2;
+      word-break:break-word;
+      text-align:justify; /* paragraphes justifiés pour arabe */
+    }
+
+    .content p{ margin-bottom:14px; }
+
+    @media (max-width:520px){
+      body{padding:18px}
+      .card{padding:18px}
+      .title{font-size:18px}
+      .content{font-size:15px}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <article class="card" role="article" aria-labelledby="main-title">
+      <div class="header">
+        <div class="badge" aria-hidden="true">شجرة</div>
+        <div>
+          <h1 id="main-title" class="title">مشجّرة مساكن</h1>
+          <div class="subtitle">مشروع توثيق شجرة عائلات مساكن — إنجاز كمال القزّاح</div>
+        </div>
+      </div>
+
+      <div class="content">
+        <p>هذا المشروع من إنجاز كمال القزّاح (Kamel El-GAZZAH) بهدف جمع شجرة عائلات مساكن في تونس. البيانات تم جمعها من أفراد العائلة و كتاب السّيّد محمود القزّاح ومصادر مختلفة.</p>
+
+        <p>يمكنك النقر على أي اسم في الشجرة لرؤية المزيد من التفاصيل حول الشخص، بما في ذلك والده وجدّه وصورته إن وجدت.</p>
+
+        <p>تم تطوير هذا المشروع باستخدام مكتبة Treant.js لعرض الشجرة بشكل تفاعلي.</p>
+
+        <p>للمزيد من المعلومات أو للمساهمة في توسيع الشجرة، يرجى التواصل معي عبر وسائل التواصل الاجتماعي المذكورة أعلاه.</p>
+
+        <p>شكراً لاهتمامكم!</p>
+      </div>
+    </article>
+  </div>
+</body>
+</html>

@@ -4,6 +4,7 @@
 <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KZGCHS2XLH"></script>
+    <script src="/js/site-header.js"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
@@ -12,59 +13,20 @@
         gtag('config', 'G-KZGCHS2XLH');
     </script>
     <meta charset="UTF-8">
-    <title>Msaken Family Tree, Tunisia</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/treant-js/1.0/Treant.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/treant-js/1.0/Treant.min.js"></script>
-    <link rel="stylesheet" href="style-tree.css">
+    <title>Msaken Family Tree, Tunisia</title>   
+    <link rel="stylesheet" href="/css/style-main.css">
 </head>
-
 <body>
-    <div class="header">
-        <div>
-            <img src="tree.svg" alt="Arbre généalogique" width="40" height="40">
-        </div>
-        <h2>شجرة عائلات أهل القصور الخمسة، مساكن</h2>
-        <h3>Msaken Family Tree, Tunisia, </h3>
-
-        <div>
-            <p>by Kamel El-GAZZAH </p>
-
-        </div>
-
-        
-        <div>
-            <img src="tree.svg" alt="Arbre généalogique" width="40" height="40">
-        </div>
+    <site-header></site-header>
+    <div class="table-container">
+    <main class="trees-links">
+        <div class="tree-link"><a href="msaken_tree.html?tree=moussa">موسى</a></div>
+        <div class="tree-link"><a href="msaken_tree.html?tree=gazzah"> القزاح</a></div>
+        <div class="tree-link"><a href="msaken_tree.html?tree=baya">بية</a></div>
+        <div class="tree-link"><a href="msaken_tree.html">شجرة المؤسسين</a></div>
+    </main>
     </div>
-
-
-    <!-- Réseaux sociaux sous le header -->
-    <div class="social-links-container">
-        <a href="#" onclick="about()"><img src="about.svg" alt="À propos" width="40" height="40"></a>
-        <a href="https://www.yfull.com/tree/J-L271/"><img src="yfull.png" width="40" height="40" alt="yfull"></a>
-        <a href="https://www.facebook.com/kmlgzh" target="_blank" aria-label="Facebook" class="facebook">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path
-                    d="M22 12a10 10 0 1 0-11 9.95V15h-2v-3h2v-2c0-2 1-3 3-3h2v3h-1c-1 0-1 .5-1 1v1h2l-1 3h-1v6.95A10 10 0 0 0 22 12z" />
-            </svg>
-        </a>
-        <a href="https://www.facebook.com/groups/567910344161630"><img src="dna.svg" width="50"
-                alt="Msaken DNA Facebook Group"></a>
-        <a href="https://x.com/kemalgazzah" target="_blank" aria-label="X" class="x">
-
-            <img src="x.svg" alt="X" width="40" height="40">
-        </a>
-        <a href="https://www.linkedin.com/in/kamel-gazzah/" target="_blank" aria-label="LinkedIn" class="linkedin">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path
-                    d="M4 4h4v16H4V4zm6 0h4v2h.1c.5-.9 1.8-2 3.9-2 4 0 4.5 2.6 4.5 6v10h-4v-9c0-2-1-3-2.5-3S12 11 12 13v7h-4V4z" />
-            </svg>
-        </a>
-    </div>
-    <div id="tree"></div>
-    <script src="data.js"></script>
-    <script src="msaken_tree_js.js"></script>
+    
 </body>
 
 </html>
