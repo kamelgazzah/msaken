@@ -6,10 +6,10 @@ class SiteHeader extends HTMLElement {
 
   connectedCallback() {
     this.shadowRoot.innerHTML = `
-      <link rel="stylesheet" href="/css/header.css">
+      <link rel="stylesheet" href="css/header.css">
       <div class="header">
         <div>
-            <img src="/img/tree.svg" alt="Arbre généalogique" width="40" height="40">
+            <img src="img/tree.svg" alt="Arbre généalogique" width="40" height="40">
         </div>
         <h2>شجرة عائلات أهل القصور الخمسة، مساكن</h2>
         <h3>Msaken Family Tree, Tunisia</h3>
@@ -17,7 +17,7 @@ class SiteHeader extends HTMLElement {
             <p>by Kamel El-GAZZAH </p>
         </div>
         <div>
-            <img src="/img/tree.svg" alt="Arbre généalogique" width="40" height="40">
+            <img src="img/tree.svg" alt="Arbre généalogique" width="40" height="40">
         </div>
       </div>
 
@@ -28,10 +28,10 @@ class SiteHeader extends HTMLElement {
       <!-- Réseaux sociaux sous le header -->
       <div class="social-links-container">
         <a href="#" onclick="openPopup('details.html')">
-          <img src="/img/about.svg" alt="À propos" width="40" height="40">
+          <img src="img/about.svg" alt="À propos" width="40" height="40">
         </a>
         <a href="https://www.yfull.com/tree/J-L271/" target="_blank">
-          <img src="/img/yfull.png" width="40" height="40" alt="yfull">
+          <img src="img/yfull.png" width="40" height="40" alt="yfull">
         </a>
         <a href="https://www.facebook.com/kmlgzh" target="_blank" aria-label="Facebook" class="facebook">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -39,10 +39,10 @@ class SiteHeader extends HTMLElement {
           </svg>
         </a>
         <a href="https://www.facebook.com/groups/567910344161630">
-          <img src="/img/dna.svg" width="50" alt="Msaken DNA Facebook Group">
+          <img src="img/dna.svg" width="50" alt="Msaken DNA Facebook Group">
         </a>
         <a href="https://x.com/kemalgazzah" target="_blank" aria-label="X" class="x">
-          <img src="/img/x.svg" alt="X" width="40" height="40">
+          <img src="img/x.svg" alt="X" width="40" height="40">
         </a>
         <a href="https://www.linkedin.com/in/kamel-gazzah/" target="_blank" aria-label="LinkedIn" class="linkedin">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -50,7 +50,7 @@ class SiteHeader extends HTMLElement {
           </svg>
         </a>
         <a href="/" target="_blank" aria-label="Home" class="home">
-          <img src="/img/home.svg" alt="HomeX" width="40" height="40">
+          <img src="img/home.svg" alt="HomeX" width="40" height="40">
         </a>
       </div>
     `;

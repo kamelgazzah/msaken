@@ -359,7 +359,7 @@ async function loadData() {
     try {
         const urlParams = new URLSearchParams(window.location.search);
         const treeName = urlParams.get("tree") || "msaken";
-        const jsonFile = `/data/${treeName}.json`;
+        const jsonFile = `data/${treeName}.json`;
         console.log(`🔄 Chargement du fichier JSON : ${jsonFile}`);
 
         const response = await fetch(jsonFile);
