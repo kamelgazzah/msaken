@@ -348,7 +348,7 @@ function drawTree(recenterId = null) {
 // Affiche un message Data unavailable
 function showDataUnavailable() {
     const container = document.getElementById('tree');
-    container.innerHTML = '<div style="padding:20px; text-align:center; color:red; font-weight:bold;">Data unavailable</div>';
+    container.innerHTML = '<div style="padding:20px; text-align:center; color:red; font-weight:bold;">ستضاف لاحقا</div>';
 }
 
 // --------------------------------------
