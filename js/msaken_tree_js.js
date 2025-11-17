@@ -28,7 +28,7 @@ function closePopup() {
     }, 150); // le temps de l'animation
 }
 
-function openPopup(file) {
+window.openPopup =function (file) {
     const overlay = document.getElementById('popup-overlay');
     const content = document.getElementById('popup-content');
 
