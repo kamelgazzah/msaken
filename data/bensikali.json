@@ -746,7 +746,7 @@
     {
         "id": 7922289,
         "nom": "ﺳﺎﻣﻲ",
-        "genre": "F",
+        "genre": "M",
         "id_pere": 9637404,
         "photourl": "",
         "comments": ""
@@ -759,4 +759,5 @@
         "photourl": "",
         "comments": ""
     }
+
 ]
