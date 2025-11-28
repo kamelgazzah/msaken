@@ -32,6 +32,10 @@ class SiteHeader extends HTMLElement {
         <a href="#" onclick="alert('مشجرة أهالي مساكن'); return false;" aria-label="À propos" class="about">
           <img src="img/about.svg" alt="À propos" width="40" height="40">
         </a>
+        <a href="links.html" target="_blank" aria-label="Liens" class="links">  
+          <img src="img/links.svg" alt="Liens" width="40" height="40">
+        </a>
+        
         <a href="https://www.yfull.com/tree/J-L271/" target="_blank">
           <img src="img/yfull.png" width="40" height="40" alt="yfull">
         </a>
