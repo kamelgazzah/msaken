@@ -4,6 +4,8 @@ class SiteHeader extends HTMLElement {
     this.attachShadow({mode: 'open'});
   }
 
+  
+
   connectedCallback() {
     this.shadowRoot.innerHTML = `
       <link rel="stylesheet" href="css/header.css">
@@ -27,7 +29,7 @@ class SiteHeader extends HTMLElement {
 
       <!-- Réseaux sociaux sous le header -->
       <div class="social-links-container">
-        <a href="#" onclick="openPopup('popups/details.html')">
+        <a href="#" onclick="alert('مشجرة أهالي مساكن'); return false;" aria-label="À propos" class="about">
           <img src="img/about.svg" alt="À propos" width="40" height="40">
         </a>
         <a href="https://www.yfull.com/tree/J-L271/" target="_blank">
