@@ -1,34 +1,57 @@
 /* Style pour la page des liens vers les arbres */
 /* Conteneur des liens */
+/* Grille des liens */
 .trees-links {
-    margin-top: 160px;              /* espace pour header fixe */
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 18px;
-    width: 90%;                     /* marge gauche/droite */
-    max-width: 1100px;              /* limite sur grands écrans */
-    margin-left: auto;
-    margin-right: auto;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 14px;
 }
 
 /* Style des blocs liens */
 .tree-link a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 70px;
+    display: block;
+    padding: 14px 18px;
     background: #e0f7fa;
     border-radius: 12px;
     text-decoration: none;
     color: #004d40;
-    font-size: 1rem;
-    font-weight: 600;
-    padding: 10px;
-    transition: 0.25s;
+    font-size: 2rem !important;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    transition: background 0.2s, transform 0.15s;
 }
 
 .tree-link a:hover {
     background: #b2ebf2;
     transform: scale(1.05);
 }
-    
+
+/* Conteneur principal : collé en haut */
+.table-container {
+    max-width: 900px;
+    margin: 130px auto 20px;
+    /* espace sous le header */
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* alignement en haut vertical */
+}
+
+/* ———————— RESPONSIVE ———————— */
+
+/* Mobile : 3 par ligne + boutons plus grands */
+@media (max-width: 768px) {
+    .trees-links {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .tree-link a {
+        padding: 18px 10px;
+        font-size: 1.7rem !important;  /* un peu réduit, mais lisible */
+    }
+
+    .table-container {
+        margin-top: 160px;
+    }
+}
