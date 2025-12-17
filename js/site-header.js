@@ -13,8 +13,8 @@ class SiteHeader extends HTMLElement {
         <div>
             <img src="img/tree.svg" alt="Arbre généalogique" width="40" height="40">
         </div>
-        <h2>شجرة عائلات أهل القصور الخمسة، مساكن</h2>
-        <h3>Msaken Family Tree, Tunisia</h3>
+        <h2>عائلات مساكن</h2>
+        <h3>Msaken,Tunisia Family names</h3>
         <div>
             <p>by Kamel El-GAZZAH </p>
         </div>
