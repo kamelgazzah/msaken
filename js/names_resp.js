@@ -1,9 +1,9 @@
 let namesData = [];
 let currentPage = 1;
 
-let ITEMS_PER_ROW = 5;  // initial, sera recalculé
-const ROWS_PER_PAGE = 8; // fixe pour garder hauteur stable
-const default_rows_per_page = 5;
+let ITEMS_PER_ROW = 4;  // initial, sera recalculé
+const ROWS_PER_PAGE = 6; // fixe pour garder hauteur stable
+const default_rows_per_page = 4;
 
 async function loadNamesData() {
   try {
