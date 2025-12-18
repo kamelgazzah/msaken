@@ -11,13 +11,16 @@ body {
 
 .names-grid {
   display: grid;
-  gap: 12px; /* plus d’espace entre cellules */
+  gap: 12px;
+  /* plus d’espace entre cellules */
 }
 
 .name-cell {
-  background-color: #ffffff; /* fond clair */
+  background-color: #ffffff;
+  /* fond clair */
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* ombre douce */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  /* ombre douce */
   text-align: center;
   padding: 12px;
   min-height: 100px;
@@ -28,7 +31,8 @@ body {
 }
 
 .name-cell:hover {
-  transform: translateY(-3px); /* effet hover léger */
+  transform: translateY(-3px);
+  /* effet hover léger */
 }
 
 .nom {
@@ -38,8 +42,19 @@ body {
   color: #1709d6;
 }
 
+.nom.link {
+  color: #007BFF;
+  background-color: gold;
+  text-decoration: none;
+}
+
+.nom.link:hover {
+  text-decoration: underline;
+}
+
 .number {
-  background-color: #d0d0d0; /* fond un peu foncé */
+  background-color: #d0d0d0;
+  /* fond un peu foncé */
   color: #111;
   border-radius: 4px;
   padding: 4px 6px;
@@ -63,6 +78,31 @@ button {
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
+
+.qsars {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+}
+
+
+.qsar {
+  padding: 2px 10px;
+  border-radius: 999px;
+  /* pilule */
+  color: white;
+  font-size: 1.2em;
+  white-space: nowrap;
+  /* pas de retour à la ligne */
+  display: inline-flex;
+  /* s’adapte au contenu */
+  align-items: center;
+  justify-content: center;
+  line-height: 1.4;
+}
+
 
 button:hover {
   background-color: #0056b3;
