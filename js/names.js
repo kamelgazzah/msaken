@@ -7,7 +7,7 @@ const ITEMS_PER_PAGE = ITEMS_PER_ROW * ROWS_PER_PAGE;
 
 async function loadNamesData() {
   try {
-    const response = await fetch('/data/names.json');
+    const response = await fetch('data/names.json');
 
     if (!response.ok) {
       throw new Error('Erreur : fichier names.json introuvable');

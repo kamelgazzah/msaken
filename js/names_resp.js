@@ -7,7 +7,7 @@ const default_rows_per_page = 5;
 
 async function loadNamesData() {
   try {
-    const response = await fetch('/data/names.json');
+    const response = await fetch('data/names.json');
     if (!response.ok) throw new Error('Fichier names.json introuvable');
 
     const data = await response.json();
