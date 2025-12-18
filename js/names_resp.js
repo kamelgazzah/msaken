@@ -2,7 +2,7 @@ let namesData = [];
 let currentPage = 1;
 
 let ITEMS_PER_ROW = 4;  // initial, sera recalculé
-const ROWS_PER_PAGE = 6; // fixe pour garder hauteur stable
+const ROWS_PER_PAGE = 10; // fixe pour garder hauteur stable
 const default_rows_per_page = 4;
 
 const QSAR_COLORS = {
@@ -50,6 +50,11 @@ function updateGridColumns() {
   renderPaginatedGrid(namesData, currentPage); // re-render avec le nouveau nb de colonnes
 }
 
+function capitalize(str) {
+  if (!str) return '';
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 function renderPaginatedGrid(data, page) {
   const container = document.getElementById('namesTable');
   container.innerHTML = '';
@@ -69,7 +74,7 @@ function renderPaginatedGrid(data, page) {
     const nomHtml = hasLink
       ? `<a class="nom link"
          href="msaken_tree.html?tree=${encodeURIComponent(item.tree_link)}">
-         ${item.nom}
+         ${item.nom} ${item.tree_link ? '🔗' : ' '} ${capitalize(item.tree_link)}
        </a>`
       : `<div class="nom">${item.nom}</div>`;
 
