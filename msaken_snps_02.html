@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Arbre phylogénétique SNP</title>
+
+  <!-- Treant -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/treant-js/1.0/Treant.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/treant-js/1.0/Treant.min.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .node-box {
+      padding: 6px 8px;
+      font-size: 12px;
+      line-height: 1.35;
+      text-align: center;
+      border-radius: 6px;
+      border: 1px solid #444;
+      background: #f8f8f8;
+      min-width: 140px;
+    }
+
+    /* Branches terminales (*) */
+    .terminal-node {
+      border: 2px solid #000;
+      font-weight: bold;
+      box-shadow: 0 0 6px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+
+<h3>Msaken SNP/Families Tree<br>by <b>Kamel El Gazzah</b> <br/>Last update <b>13/01/2026</b></h3>
+<div id="tree-container"></div>
+
+<script>
+  const jsonData = [
+{"id":5,"name":"J-L271","snps":{},"famille":"قصور مساكن الخمسة","tmrca":"1810","idroot":null},
+{"id":6,"name":"J-L271*","snps":{},"famille":"محجوب","tmrca":"1810","idroot":63},
+{"id":7,"name":"J-FGC32594","snps":{},"famille":"","tmrca":"1630","idroot":5},
+{"id":8,"name":"J-FGC32594*","snps":{},"famille":"قم","tmrca":"1630","idroot":82},
+{"id":9,"name":"J-Z43715","snps":{},"famille":"","tmrca":"1570","idroot":7},
+{"id":10,"name":"J-A14971","snps":{},"famille":"بن سيك علي","tmrca":"1570","idroot":101},
+{"id":12,"name":"J-FGC32589","snps":{},"famille":"","tmrca":"995","idroot":9},
+{"id":13,"name":"J-FGC37143","snps":{},"famille":"الشّطّي","tmrca":"850","idroot":12},
+{"id":14,"name":"J-FGC32589*","snps":{},"famille":"القزّاح","tmrca":"995","idroot":12},
+{"id":15,"name":"J-Y200779","snps":{},"famille":"","tmrca":"1500","idroot":9},
+{"id":16,"name":"J-Y200779*","snps":{},"famille":"بوهلال","tmrca":"1500","idroot":15},
+{"id":17,"name":"J-Y209473","snps":{},"famille":"بن عبد الله","tmrca":"700","idroot":15},
+{"id":41,"name":"","snps":{},"famille":"","tmrca":"","idroot":2},
+{"id":42,"name":"","snps":{},"famille":"","tmrca":"","idroot":41},
+{"id":43,"name":"","snps":{},"famille":"","tmrca":"","idroot":42},
+{"id":44,"name":"","snps":{},"famille":"","tmrca":"","idroot":43},
+{"id":45,"name":"","snps":{},"famille":"","tmrca":"","idroot":44},
+{"id":61,"name":"","snps":{},"famille":"","tmrca":"","idroot":5},
+{"id":62,"name":"","snps":{},"famille":"","tmrca":"","idroot":61},
+{"id":63,"name":"","snps":{},"famille":"","tmrca":"","idroot":62},
+{"id":81,"name":"","snps":{},"famille":"","tmrca":"","idroot":7},
+{"id":82,"name":"","snps":{},"famille":"","tmrca":"","idroot":81},
+{"id":101,"name":"","snps":{},"famille":"","tmrca":"","idroot":9},
+{"id":31,"name":"","snps":{},"famille":"","tmrca":"","idroot":3},
+{"id":32,"name":"","snps":{},"famille":"","tmrca":"","idroot":31},
+{"id":33,"name":"","snps":{},"famille":"","tmrca":"","idroot":32},
+{"id":34,"name":"","snps":{},"famille":"","tmrca":"","idroot":33},
+{"id":35,"name":"J-FGCC3618*","snps":{},"famille":"السالار في الصين","tmrca":"3370","idroot":34},
+
+
+
+
+
+];
+
+
+
+
+// ---------- UTILITAIRES ----------
+
+// Couleurs dynamiques pour les familles
+const familyColors = {};
+const colorPalette = [
+  "#e3f2fd", "#fce4ec", "#e8f5e9",
+  "#fff3e0", "#ede7f6", "#f3e5f5",
+  "#e0f2f1", "#f9fbe7"
+];
+let colorIndex = 0;
+function getFamilyColor(famille) {
+  if (!famille) return "#f8f8f8";
+  if (!familyColors[famille]) {
+    familyColors[famille] = colorPalette[colorIndex++ % colorPalette.length];
+  }
+  return familyColors[famille];
+}
+
+// Génération HTML pour un nœud à partir du JSON
+// Génération HTML pour un nœud à partir du JSON
+function buildNodeHTML(item) {
+  // Si le nom est vide, retourner juste un petit espace pour nœud vide
+  if (!item.name || item.name.trim() === "") {
+    return "&nbsp;"; // petit nœud vide
+  }
+
+  let html = `<strong>${item.name}</strong><br>`;
+  if (item.famille) html += ` ${item.famille}<br>`;
+  html += `TMRCA : ${item.tmrca && item.tmrca !== "." ? item.tmrca : "Inconnu"}<br>`;
+  if (item.snps && Object.keys(item.snps).length > 0)
+    html += `SNPs : ${Object.keys(item.snps).join(", ")}`;
+  return html;
+};
+
+// ---------- CONSTRUCTION DES NŒUDS ----------
+const nodeMap = {};
+
+// Crée chaque nœud (même traitement pour tous)
+jsonData.forEach(item => {
+  nodeMap[item.id] = {
+    innerHTML: buildNodeHTML(item),
+    HTMLclass: "node-box",
+    children: []
+  };
+});
+
+// Construction hiérarchique
+jsonData.forEach(item => {
+  if (item.idroot !== null && nodeMap[item.idroot]) {
+    nodeMap[item.idroot].children.push(nodeMap[item.id]);
+  }
+});
+
+// Racine
+const root = jsonData.find(n => n.idroot === null);
+
+// ---------- RENDER TREANT ----------
+const chartConfig = {
+  chart: {
+    container: "#tree-container",
+    rootOrientation: "NORTH",
+    nodeAlign: "CENTER",
+    connectors: { type: "step" },
+    levelSeparation: 80
+  },
+  nodeStructure: nodeMap[root.id]
+};
+
+new Treant(chartConfig);
+
+// ---------- COLORATION DES FAMILLES ----------
+setTimeout(() => {
+  jsonData.forEach(item => {
+    const nodes = document.getElementsByClassName("node-box");
+    Array.from(nodes).forEach(el => {
+      if (item.famille && el.innerHTML.includes(` ${item.famille}`)) {
+        el.style.background = getFamilyColor(item.famille);
+      }
+    });
+  });
+}, 0);
+
+</script>
+</body>
+</html>
