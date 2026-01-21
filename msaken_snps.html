@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <title>Msaken SNPS</title>
-   <script src="js/site-header.js?id=571"></script>
+  <script src="js/site-header.js?id=571"></script>
 
   <!-- Treant -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/treant-js/1.0/Treant.css">
@@ -67,7 +68,7 @@
     .terminal-node {
       border: 2px solid #000;
       font-weight: bold;
-      box-shadow: 0 0 6px rgba(0,0,0,0.3);
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
     }
 
     /* ===== RESPONSIVE ===== */
@@ -89,120 +90,126 @@
 </head>
 
 <body>
- <site-header></site-header>
-<header class="page-header">
-  <h1>Msaken SNP / Families Tree</h1>
-  <h2>by <b>Kamel El Gazzah</b></h2>
-  <p>Last update <b>13/01/2026</b></p>
-</header>
+  <site-header></site-header>
+  <header class="page-header">
+    <h1>Msaken SNP / Families Tree</h1>
+    <h2>by <b>Kamel El Gazzah</b></h2>
+    <p>Last update <b>13/01/2026</b></p>
+  </header>
 
-<div id="tree-container"></div>
+  <div id="tree-container"></div>
 
-<script>
-const jsonData = [
-  {"id":5,"name":"J-L271","snps":{},"famille":"قصور مساكن الخمسة","tmrca":"1810","idroot":null},
-  {"id":6,"name":"J-L271*","snps":{},"famille":"محجوب","tmrca":"1810","idroot":63},
-  {"id":7,"name":"J-FGC32594","snps":{},"famille":"","tmrca":"1630","idroot":5},
-  {"id":8,"name":"J-FGC32594*","snps":{},"famille":"قم","tmrca":"1630","idroot":82},
-  {"id":9,"name":"J-Z43715","snps":{},"famille":"","tmrca":"1570","idroot":7},
-  {"id":10,"name":"J-A14971","snps":{},"famille":"بن سيك علي","tmrca":"1570","idroot":101},
-  {"id":12,"name":"J-FGC32589","snps":{},"famille":"","tmrca":"995","idroot":9},
-  {"id":13,"name":"J-FGC37143","snps":{},"famille":"الشّطّي","tmrca":"850","idroot":12},
-  {"id":14,"name":"J-FGC32589*","snps":{},"famille":"القزّاح","tmrca":"995","idroot":12},
-  {"id":15,"name":"J-Y200779","snps":{},"famille":"","tmrca":"1500","idroot":9},
-  {"id":16,"name":"J-Y200779*","snps":{},"famille":"بوهلال","tmrca":"1500","idroot":15},
-  {"id":17,"name":"J-Y209473","snps":{},"famille":"بن عبد الله","tmrca":"700","idroot":15},
+  <script>
+    function hasValidName(item) {
+      return item.name && item.name.trim() !== "";
+    }
+    const jsonData = [
+      { "id": 5, "name": "J-L271", "snps": {}, "famille": "قصور مساكن الخمسة", "tmrca": "1810", "idroot": null },
+      { "id": 6, "name": "J-L271*", "snps": {}, "famille": "محجوب", "tmrca": "1810", "idroot": 63 },
+      { "id": 7, "name": "J-FGC32594", "snps": {}, "famille": "", "tmrca": "1630", "idroot": 5 },
+      { "id": 8, "name": "J-FGC32594*", "snps": {}, "famille": "قم", "tmrca": "1630", "idroot": 82 },
+      { "id": 9, "name": "J-Z43715", "snps": {}, "famille": "", "tmrca": "1570", "idroot": 7 },
+      { "id": 10, "name": "J-A14971", "snps": {}, "famille": "بن سيك علي", "tmrca": "1570", "idroot": 101 },
+      { "id": 12, "name": "J-FGC32589", "snps": {}, "famille": "", "tmrca": "995", "idroot": 9 },
+      { "id": 13, "name": "J-FGC37143", "snps": {}, "famille": "الشّطّي", "tmrca": "850", "idroot": 12 },
+      { "id": 14, "name": "J-FGC32589*", "snps": {}, "famille": "القزّاح", "tmrca": "995", "idroot": 12 },
+      { "id": 15, "name": "J-Y200779", "snps": {}, "famille": "", "tmrca": "1500", "idroot": 9 },
+      { "id": 16, "name": "J-Y200779*", "snps": {}, "famille": "بوهلال", "tmrca": "1500", "idroot": 15 },
+      { "id": 17, "name": "J-Y209473", "snps": {}, "famille": "بن عبد الله", "tmrca": "700", "idroot": 15 },
 
-  {"id":41,"name":"","snps":{},"famille":"","tmrca":"","idroot":2},
-  {"id":42,"name":"","snps":{},"famille":"","tmrca":"","idroot":41},
-  {"id":43,"name":"","snps":{},"famille":"","tmrca":"","idroot":42},
-  {"id":44,"name":"","snps":{},"famille":"","tmrca":"","idroot":43},
-  {"id":45,"name":"","snps":{},"famille":"","tmrca":"","idroot":44},
+      { "id": 41, "name": "", "snps": {}, "famille": "", "tmrca": "", "idroot": 2 },
+      { "id": 42, "name": "", "snps": {}, "famille": "", "tmrca": "", "idroot": 41 },
+      { "id": 43, "name": "", "snps": {}, "famille": "", "tmrca": "", "idroot": 42 },
+      { "id": 44, "name": "", "snps": {}, "famille": "", "tmrca": "", "idroot": 43 },
+      { "id": 45, "name": "", "snps": {}, "famille": "", "tmrca": "", "idroot": 44 },
 
-  {"id":61,"name":"","snps":{},"famille":"","tmrca":"","idroot":5},
-  {"id":62,"name":"","snps":{},"famille":"","tmrca":"","idroot":61},
-  {"id":63,"name":"","snps":{},"famille":"","tmrca":"","idroot":62},
+      { "id": 61, "name": "", "snps": {}, "famille": "", "tmrca": "", "idroot": 5 },
+      { "id": 62, "name": "", "snps": {}, "famille": "", "tmrca": "", "idroot": 61 },
+      { "id": 63, "name": "", "snps": {}, "famille": "", "tmrca": "", "idroot": 62 },
 
-  {"id":81,"name":"","snps":{},"famille":"","tmrca":"","idroot":7},
-  {"id":82,"name":"","snps":{},"famille":"","tmrca":"","idroot":81},
+      { "id": 81, "name": "", "snps": {}, "famille": "", "tmrca": "", "idroot": 7 },
+      { "id": 82, "name": "", "snps": {}, "famille": "", "tmrca": "", "idroot": 81 },
 
-  {"id":101,"name":"","snps":{},"famille":"","tmrca":"","idroot":9}
-];
+      { "id": 101, "name": "", "snps": {}, "famille": "", "tmrca": "", "idroot": 9 }
+    ];
 
-// ===== UTILITAIRES =====
-const familyColors = {};
-const colorPalette = [
-  "#e3f2fd", "#fce4ec", "#e8f5e9",
-  "#fff3e0", "#ede7f6", "#f3e5f5",
-  "#e0f2f1", "#f9fbe7"
-];
-let colorIndex = 0;
+    // ===== UTILITAIRES =====
+    const familyColors = {};
+    const colorPalette = [
+      "#e3f2fd", "#fce4ec", "#e8f5e9",
+      "#fff3e0", "#ede7f6", "#f3e5f5",
+      "#e0f2f1", "#f9fbe7"
+    ];
+    let colorIndex = 0;
 
-function getFamilyColor(famille) {
-  if (!famille) return "#f8f8f8";
-  if (!familyColors[famille]) {
-    familyColors[famille] = colorPalette[colorIndex++ % colorPalette.length];
-  }
-  return familyColors[famille];
-}
+    function getFamilyColor(famille) {
+      if (!famille) return "#f8f8f8";
+      if (!familyColors[famille]) {
+        familyColors[famille] = colorPalette[colorIndex++ % colorPalette.length];
+      }
+      return familyColors[famille];
+    }
 
-// ===== NODE HTML =====
-function buildNodeHTML(item) {
-  if (!item.name || item.name.trim() === "") {
-    return "&nbsp;";
-  }
+    // ===== NODE HTML =====
+    function buildNodeHTML(item) {
+      if (!item.name || item.name.trim() === "") {
+        return "&nbsp;";
+      }
 
-  let html = `<strong>${item.name}</strong><br>`;
-  if (item.famille) html += `${item.famille}<br>`;
-  html += `TMRCA : ${item.tmrca || "Inconnu"}`;
-  return html;
-}
+      let html = `<strong>${item.name}</strong><br>`;
+      if (item.famille) html += `${item.famille}<br>`;
+      html += `TMRCA : ${item.tmrca || "Inconnu"}`;
+      return html;
+    }
 
-// ===== BUILD TREE =====
-const nodeMap = {};
+    // ===== BUILD TREE =====
+    const nodeMap = {};
 
-jsonData.forEach(item => {
-  nodeMap[item.id] = {
-    innerHTML: buildNodeHTML(item),
-    HTMLclass: "node-box" + (item.name && item.name.endsWith("*") ? " terminal-node" : ""),
-    children: []
-  };
-});
+    jsonData.forEach(item => {
+      nodeMap[item.id] = {
+        innerHTML: buildNodeHTML(item),
+        HTMLclass: "node-box" + (item.name && item.name.endsWith("*") ? " terminal-node" : ""),
+        children: []
+      };
+    });
 
-jsonData.forEach(item => {
-  if (item.idroot !== null && nodeMap[item.idroot]) {
-    nodeMap[item.idroot].children.push(nodeMap[item.id]);
-  }
-});
-
-const root = jsonData.find(n => n.idroot === null);
-
-// ===== RENDER =====
-const chartConfig = {
-  chart: {
-    container: "#tree-container",
-    rootOrientation: "NORTH",
-    nodeAlign: "CENTER",
-    connectors: { type: "step" },
-    levelSeparation: window.innerWidth < 768 ? 100 : 80
-  },
-  nodeStructure: nodeMap[root.id]
-};
-
-new Treant(chartConfig);
-
-// ===== COLOR FAMILIES =====
-setTimeout(() => {
-  jsonData.forEach(item => {
-    if (!item.famille) return;
-    Array.from(document.getElementsByClassName("node-box")).forEach(el => {
-      if (el.innerHTML.includes(item.famille)) {
-        el.style.background = getFamilyColor(item.famille);
+    jsonData.forEach(item => {
+      if (item.idroot !== null && nodeMap[item.idroot]) {
+        nodeMap[item.idroot].children.push(nodeMap[item.id]);
       }
     });
-  });
-}, 0);
-</script>
+
+    const root = jsonData.find(n => n.idroot === null);
+
+    // ===== RENDER =====
+    const chartConfig = {
+      chart: {
+        container: "#tree-container",
+        rootOrientation: "NORTH",
+        nodeAlign: "CENTER",
+        connectors: { type: "step" },
+        levelSeparation: window.innerWidth < 768 ? 100 : 80
+      },
+      nodeStructure: nodeMap[root.id]
+    };
+
+    new Treant(chartConfig);
+    
+
+    // ===== COLOR FAMILIES =====
+    setTimeout(() => {
+      
+      jsonData.forEach(item => {
+        if (!item.famille) return;
+        Array.from(document.getElementsByClassName("node-box")).forEach(el => {
+          if (el.innerHTML.includes(item.famille)) {
+            el.style.background = getFamilyColor(item.famille);
+          }
+        });
+      });
+    }, 0);
+  </script>
 
 </body>
+
 </html>

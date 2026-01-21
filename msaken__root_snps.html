@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Arbre phylogénétique SNP</title>
-
+   <script src="js/site-header.js?id=571"></script>
   <!-- Treant -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/treant-js/1.0/Treant.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js"></script>
@@ -12,8 +12,44 @@
   <style>
     body {
       font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0 10px;
+      background: #ffffff;
     }
 
+    /* ===== HEADER ===== */
+    .page-header {
+      text-align: center;
+      margin: 20px auto 30px;
+    }
+
+    .page-header h1 {
+      font-size: 22px;
+      margin-bottom: 5px;
+    }
+
+    .page-header h2 {
+      font-size: 16px;
+      font-weight: normal;
+      margin: 0;
+    }
+
+    .page-header p {
+      font-size: 12px;
+      color: #555;
+      margin-top: 5px;
+    }
+
+    /* ===== TREE CONTAINER ===== */
+    #tree-container {
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding-bottom: 20px;
+      touch-action: pan-x pan-y;
+    }
+
+    /* ===== NODE STYLE ===== */
     .node-box {
       padding: 6px 8px;
       font-size: 12px;
@@ -23,19 +59,43 @@
       border: 1px solid #444;
       background: #f8f8f8;
       min-width: 140px;
+      user-select: none;
     }
 
     /* Branches terminales (*) */
     .terminal-node {
       border: 2px solid #000;
       font-weight: bold;
-      box-shadow: 0 0 6px rgba(0,0,0,0.3);
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .node-box {
+        font-size: 11px;
+        min-width: 110px;
+        padding: 5px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .node-box {
+        font-size: 10px;
+        min-width: 95px;
+      }
     }
   </style>
 </head>
 <body>
+  <site-header></site-header>
+  <header class="page-header">
+    <h1>J-L192 SNP  Tree</h1>
+    <h2>by <b>Kamel El Gazzah</b></h2>
+    <p>Last update <b>13/01/2026</b></p>
 
-<h3>Msaken SNP/Families Tree<br>by <b>Kamel El Gazzah</b> <br/>Last update <b>13/01/2026</b></h3>
+  </header>
+
+
 <div id="tree-container"></div>
 
 <script>
