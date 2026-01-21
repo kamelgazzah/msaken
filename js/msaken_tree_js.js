@@ -155,6 +155,7 @@ function showPersonPopup_2(person, event) {
         <div>${person.genre === "M" ? "رجل" : "امرأة"}</div>
         <div><strong>الأب:</strong> ${pere ? pere.nom : "محمّد الجدّ الجامع لأهل مساكن"}</div>
         <div><strong>الجدّ:</strong> ${grandpere ? grandpere.nom : "محمّد الجدّ الجامع لأهل مساكن"}</div>
+        ${person.photourl ? `<div style="margin-top:8px;"><img src="${person.photourl}" alt="${person.nom}" style="max-width:150px; border-radius:4px;"></div>` : ''}
     `;
 
     document.body.appendChild(popup);
@@ -263,8 +264,10 @@ const buildTree = (nodeId, parentHidden = false) => {
 
     return {
         text: { name: node.nom },
+        image: node.imageurl || null,
         HTMLclass: node.genre === "M" ? "node male" : "node female",
         HTMLid: "node-" + node.id,
+        
         children: children.map(c => buildTree(c.id, isHidden))
     };
 };
@@ -302,6 +305,7 @@ function drawTree(recenterId = null) {
     const chart_config = {
         chart: {
             container: "#tree",
+            nodeHTMLTemplate: "nodeTemplate",
             rootOrientation: "NORTH",
             connectors: { type: "step" },
             nodeAlign: "CENTER",
@@ -359,7 +363,8 @@ async function loadData() {
     try {
         const urlParams = new URLSearchParams(window.location.search);
         const treeName = urlParams.get("tree") || "msaken";
-        const jsonFile = `data/${treeName}.json`;
+        console.log('treeName',treeName)
+        const jsonFile = `data/${treeName}.json?id=3707`; // cache-buster
         console.log(`🔄 Chargement du fichier JSON : ${jsonFile}`);
 
         const response = await fetch(jsonFile);

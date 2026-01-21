@@ -14,10 +14,8 @@ class SiteHeader extends HTMLElement {
             <img src="img/tree.svg" alt="Arbre généalogique" width="40" height="40">
         </div>
         <h2>عائلات مساكن</h2>
-        <h3>Msaken,Tunisia Family names</h3>
-        <!--<div>
-            <p>by Kamel El-GAZZAH </p>
-        </div>-->
+        <h3>Msaken, Tunisia Family Names</h3>
+       
         <div>
             <img src="img/tree.svg" alt="Arbre généalogique" width="40" height="40">
         </div>
@@ -34,6 +32,14 @@ class SiteHeader extends HTMLElement {
         </a>
         <a href="links.html" target="_blank" aria-label="Liens" class="links">  
           <img src="img/links.svg" alt="Liens" width="40" height="40">
+        </a>
+
+         <a href="msaken_tree.html" >
+          <img src="img/tree-5077.png" width="40" height="40" alt="yfull">
+        </a>
+
+        <a href="msaken_snps.html" >
+          <img src="img/tree2.svg" width="40" height="40" alt="yfull">
         </a>
         
         <a href="https://www.yfull.com/tree/J-L271/" target="_blank">
