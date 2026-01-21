@@ -1,0 +1,61 @@
+{
+    "links": [
+        {
+            "title": {
+                "fr": "Noms de Familles ",
+                "en": "Family names",
+                "ar": "العائلات ",
+                "zh": "著名家族"
+            },
+            "url": "names_msk_resp.html"
+        }
+    ],
+    "title": {
+        "fr": "Tableau de bord",
+        "en": "Dashboard",
+        "ar": "مساكن",
+        "zh": "仪表板"
+    },
+    "description": {
+        "fr": "Bienvenue sur le dashboard",
+        "en": "Welcome to the dashboard",
+        "ar":"موقع مساكن للذاكرة والتاريخ والعائلات",
+        "zh": "欢迎来到仪表板"
+    },
+    "content": [
+        {
+            "images": ["/private/img/maison_msk_01.jpg","/private/img/maison_msk_02.jpg","/private/img/maison_msk_03.jpg","/private/img/maison_msk_04.jpg","/private/img/maison_msk_05.jpg","/private/img/maison_msk_06.jpg",
+        "/private/img/maison_msk_08.jpg","/private/img/maison_msk_09.jpg","/private/img/maison_msk_10.jpg"],
+            "title": { "fr": "Titre FR", "en": "Title EN", "ar": "عنوان", "cn": "标题" },
+            "text": {
+                "fr": "",
+                "en": "",
+                "ar": "",
+                "zh": ""
+            }
+        }
+        
+    ],
+    "sideInfo": [
+        {
+            "title": {
+                "fr": "",
+                "en": "",
+                "ar": "",
+                "zh": ""
+            },
+            "content": {
+                "fr": "",
+                "en": "",
+                "ar": "",
+                "zh": ""
+            }
+        }
+    ],
+    "footer": {
+        "fr": "© Msaken – Projet en évolution continue – Année 2025 – Mise à jour régulière",
+        "en": "© Msaken – Project continuously evolving – Year 2025 – Regular updates",
+        "ar": "© مساكن – مشروع مستمر – سنة 2025 – تحديث منتظم",
+        "zh": "© Msaken – 项目持续发展 – 2025年 – 定期更新"
+    }
+}
