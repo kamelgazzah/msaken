@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gazzahtree Responsive</title>
+<style>
+  /* Conteneur centré et responsive */
+  .img-container {
+    width: 90%;           /* 90% de la largeur de l’écran */
+    
+    margin: 20px auto;    /* centre horizontalement avec un petit margin vertical */
+    text-align: center;
+  }
+
+  /* Image responsive */
+  .img-container img {
+    width: 100%;          /* remplit le conteneur */
+    height: auto;         /* conserve le ratio */
+    display: block;       /* élimine les petits décalages */
+  }
+
+  /* Optionnel : un peu d’ombre et style moderne */
+  .img-container img {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+  }
+
+  .img-container img:hover {
+    transform: scale(1.03); /* léger effet au survol */
+  }
+
+  /* Ajustements mobiles */
+  @media (max-width: 480px) {
+    .img-container {
+      width: 95%;
+    }
+  }
+</style>
+</head>
+<body>  
+
+<div class="img-container">
+  <img src="img/GazzahTree3.svg" alt="Gazzahtree">
+</div>
+
+</body>
+</html>
