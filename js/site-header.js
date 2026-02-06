@@ -27,6 +27,9 @@ class SiteHeader extends HTMLElement {
 
       <!-- Réseaux sociaux sous le header -->
       <div class="social-links-container">
+      <a href="gazzahtree.html" target="_blank" aria-label="Gazzahtree" class="gazzahtree">
+          <img src="img/elgazzah.svg" alt="Gazzahtree" width="80" height="80">
+        </a>  
         <a href="#" onclick="alert('مشجرة أهالي مساكن'); return false;" aria-label="À propos" class="about">
           <img src="img/about.svg" alt="À propos" width="40" height="40">
         </a>
